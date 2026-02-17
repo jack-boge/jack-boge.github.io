@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈江浩 - 策略运营 / 服务中台运营</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1d1d1f;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent-blue: #2997ff;
+            --accent-blue-hover: #0071e3;
+            --card-bg: #1d1d1f;
+            --border-color: #424245;
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(41, 151, 255, 0.15);
+            transition: var(--transition-smooth);
+        }
+
+        .hero-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(41, 151, 255, 0.25);
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-name {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .hero-intent {
+            font-size: 18px;
+            color: var(--text-primary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-blue);
+            font-size: 15px;
+            transition: var(--transition-smooth);
+        }
+
+        .contact-item:hover {
+            color: var(--accent-blue-hover);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.003em;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px 32px;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-color);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .skill-level {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .skill-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Work Experience */
+        .experience-item {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 32px;
+            transition: var(--transition-smooth);
+        }
+
+        .experience-item:hover {
+            transform: scale(1.02);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .exp-company {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .exp-position {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .exp-period {
+            font-size: 15px;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .exp-content {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .exp-content p {
+            margin-bottom: 16px;
+        }
+
+        .exp-highlight {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Preview Modal */
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            padding: 40px 22px;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .preview-modal.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .preview-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 60px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .preview-modal.active .preview-content {
+            transform: scale(1);
+        }
+
+        .preview-close {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .preview-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .preview-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-primary);
+        }
+
+        /* Preview styles - larger text */
+        .preview-company {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .preview-position {
+            font-size: 22px;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+        }
+
+        .preview-period {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            background: var(--bg-secondary);
+            padding: 12px 24px;
+            border-radius: 24px;
+            display: inline-block;
+        }
+
+        .preview-body {
+            font-size: 20px;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+
+        .preview-body p {
+            margin-bottom: 24px;
+        }
+
+        .preview-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Preview Project Styles */
+        .preview-project-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .preview-project-role {
+            font-size: 18px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .preview-project-period {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .preview-project-bg {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .preview-achievements {
+            margin-top: 24px;
+        }
+
+        .preview-achievement-item {
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .preview-achievement-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .preview-achievement-item .highlight {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Preview Skill Styles */
+        .preview-skill-name {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .preview-skill-level {
+            font-size: 18px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+            padding: 12px 24px;
+            background: rgba(41, 151, 255, 0.1);
+            border-radius: 24px;
+            display: inline-block;
+        }
+
+        .preview-skill-desc {
+            font-size: 20px;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive cards */
+        .experience-item,
+        .project-card,
+        .skill-card {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .experience-item::after,
+        .project-card::after,
+        .skill-card::after {
+            content: '点击查看详情';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .experience-item:hover::after,
+        .project-card:hover::after,
+        .skill-card:hover::after {
+            opacity: 1;
+        }
+
+        .experience-item:hover,
+        .project-card:hover,
+        .skill-card:hover {
+            box-shadow: 0 20px 60px rgba(41, 151, 255, 0.15);
+        }
+
+        /* Projects */
+        .project-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(29, 29, 31, 0.8) 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 60px rgba(41, 151, 255, 0.1);
+        }
+
+        .project-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .project-role {
+            font-size: 14px;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .project-period {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .project-bg {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .project-achievements {
+            margin-top: 16px;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .achievement-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Education */
+        .education-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .education-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .edu-degree {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .edu-school {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .edu-period {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .certificate {
+            margin-top: 24px;
+            display: inline-block;
+            background: var(--bg-secondary);
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--accent-blue);
+        }
+
+        /* Self Evaluation */
+        .evaluation-text {
+            font-size: 17px;
+            line-height: 2;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .evaluation-text .highlight {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Salary Expectation */
+        .salary-section {
+            background: linear-gradient(135deg, #1d1d1f 0%, rgba(41, 151, 255, 0.05) 100%);
+            border-radius: 24px;
+            padding: 60px;
+            text-align: center;
+            margin-top: 60px;
+            border: 1px solid var(--border-color);
+        }
+
+        .salary-label {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .salary-value {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 80px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 80px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .nav-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--accent-blue);
+            background: rgba(41, 151, 255, 0.1);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: var(--accent-blue);
+            border-radius: 1px;
+        }
+
+        /* Mobile menu button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Navigation */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 4px;
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .nav-link {
+                padding: 14px 20px;
+                border-radius: 12px;
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .nav-link.active::after {
+                display: none;
+            }
+        }
+
+        /* Scroll progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), #00d4ff);
+            z-index: 999;
+            transition: width 0.1s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 40px;
+            }
+
+            .hero-title {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .experience-item,
+            .project-card,
+            .education-card {
+                padding: 32px 24px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .exp-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">陈江浩</div>
+            <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#skills" class="nav-link">专业技能</a></li>
+                <li><a href="#experience" class="nav-link">工作经历</a></li>
+                <li><a href="#projects" class="nav-link">项目经历</a></li>
+                <li><a href="#education" class="nav-link">教育背景</a></li>
+                <li><a href="#expectations" class="nav-link">求职期望</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-avatar">
+                <img src="https://space-static.coze.site/coze_space/7606991319273065411/upload/id-2.png?sign=1773732691-b9bb18cbb2-0-4b5e74380d08d6b9addac0c08d78cb886a133596548d46bf801f11ca1457f0f4" alt="陈江浩">
+            </div>
+            <h1 class="hero-name">陈江浩</h1>
+            <p class="hero-title">求职意向：策略运营 / 服务中台运营</p>
+            <p class="hero-intent">
+                聚焦跨部门协同 + 数据驱动效率提优<br>
+                用数据与AI赋能业务，创造可量化的价值
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    13262776097
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    kousuke7197@163.com
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="fade-in" id="skills">
+        <div class="container">
+            <h2 class="section-title"><span>专业技能</span></h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-skill="excel">
+                    <div class="skill-name">Excel</div>
+                    <div class="skill-level">精通</div>
+                    <div class="skill-desc">熟练使用函数（VLOOKUP/数据透视表）+可视化图表，可独立完成业务数据报表</div>
+                </div>
+                <div class="skill-card" data-skill="sql">
+                    <div class="skill-name">SQL</div>
+                    <div class="skill-level">掌握</div>
+                    <div class="skill-desc">掌握子句/计算逻辑，能拆解业务数据集，支持复杂数据分析需求</div>
+                </div>
+                <div class="skill-card" data-skill="ai">
+                    <div class="skill-name">AI 工具</div>
+                    <div class="skill-level">精通</div>
+                    <div class="skill-desc">掌握 Gemini/GPT，可辅助生成复杂的 Excel/SQL 函数、优化数据处理逻辑</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section class="fade-in" id="experience">
+        <div class="container">
+            <h2 class="section-title"><span>工作经历</span></h2>
+            
+            <div class="experience-item">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-company">平安健康互联网股份有限公司</div>
+                        <div class="exp-position">服务质量部 | 用户体验管理岗</div>
+                    </div>
+                    <div class="exp-period">2026.01 - 至今 | 上海</div>
+                </div>
+                <div class="exp-content">
+                    <p><span class="exp-highlight">聚焦全渠道用户体验优化</span>，以"用户声音-业务推动"为核心链路开展工作：</p>
+                    <p><strong>需求侧：</strong>统筹调研问卷、NPS反馈等全渠道用户声音收集，通过内部智能文档（飞书多维表格同源工具）完成数据整理、可视化看板输出，沉淀体检/健康商城/护工服务等核心业务的体验痛点。</p>
+                    <p><strong>供给侧：</strong>联动业务方推动优化落地（如服务策略迭代、供应商资源覆盖率提升、产品功能调整），累计跟进12个体验优化项目，<span class="exp-highlight">核心业务NPS提升5%</span>。</p>
+                    <p><strong>服务团队效率提升：</strong>开展专项培训（如VoIP工具使用、问题应对技巧），强化员工处理能力，<span class="exp-highlight">团队响应时效缩短20%</span>；实现对客服务效率提升25%、人力成本削减18%。</p>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-company">上海携程国际旅行社有限公司</div>
+                        <div class="exp-position">国际业务部门 - 日本市场机票板块 | 高级知识分析师</div>
+                    </div>
+                    <div class="exp-period">2022.05 - 2025.12 | 上海</div>
+                </div>
+                <div class="exp-content">
+                    <p>负责日本市场机票业务的数据分析与流程优化，通过数据驱动的方式提升服务效率、降低人力成本，主导多个重点项目并取得显著成果。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="fade-in" id="projects">
+        <div class="container">
+            <h2 class="section-title"><span>项目经历</span></h2>
+            
+            <div class="project-card">
+                <div class="project-title">数据驱动的工单时长赋值与资源合理配置项目</div>
+                <div class="project-role">项目负责人</div>
+                <div class="project-period">2025.01 - 2025.06</div>
+                <div class="project-bg">
+                    <strong>项目背景：</strong>因员工能力差异导致工单处理效率不同，而工单分配系统未实现"能者多分"的智能化分配，出现"忙闲不均"现象。
+                </div>
+                <div class="project-achievements">
+                    <div class="achievement-item">推动工单分配模式变革，从传统排队分配转变为依据个人处理上限分配的智能化模式</div>
+                    <div class="achievement-item">取数分析各类工单类型，结合领班经验，为每个业务类型合理赋值</div>
+                    <div class="achievement-item"><span class="exp-highlight">工单处理效率从 17hour/case 优化至 12hour/case，团队单日工单承载量提升 35%</span></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">数据驱动下的服务效率提升与人力成本降低项目</div>
+                <div class="project-role">项目负责人</div>
+                <div class="project-period">2025.01 - 2025.05</div>
+                <div class="project-bg">
+                    <strong>项目背景：</strong>针对日本市场航班变动场景，需从旅行社单向联系客人通知信息，因联系不上客人严重消耗人力。
+                </div>
+                <div class="project-achievements">
+                    <div class="achievement-item">推动自动化外呼和自动化邮件上线，将人工联系阈值从2个半月调整到半个月</div>
+                    <div class="achievement-item">在团队内推广VoIP使用，<span class="exp-highlight">使用率从 5% 提升至 60%</span></div>
+                    <div class="achievement-item"><span class="exp-highlight">电话接通率从 23% 提升至 28%，单月节省人力成本约 4 万元</span></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">供应商服务流程标准化与效率提升项目</div>
+                <div class="project-role">项目负责人</div>
+                <div class="project-period">2025.01 - 2025.05</div>
+                <div class="project-bg">
+                    <strong>项目背景：</strong>Trip.com无证件机票订单占比70%，但因供应商仍索要冗余证件而暂缓出票，造成商户人力浪费与客诉率上升。
+                </div>
+                <div class="project-achievements">
+                    <div class="achievement-item">从数据中提取关键字自建字段，精准提取无证件预定暂缓单据</div>
+                    <div class="achievement-item">列举Top问题供应商，在业务沟通会议上同步供应商明细，推动合规执行</div>
+                    <div class="achievement-item"><span class="exp-highlight">供应商因证件问题暂缓出票量月减 80%</span>，建立"数据监控-跨部门同步-流程标准化"闭环</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="fade-in" id="education">
+        <div class="container">
+            <h2 class="section-title"><span>教育背景</span></h2>
+            <div class="education-card">
+                <div class="edu-degree">英语语言文学 | 本科</div>
+                <div class="edu-school">早稻田大学</div>
+                <div class="edu-period">2018.04 - 2022.03</div>
+                <div class="certificate">日语 N1 | 2021.12 获得</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Salary & Intent -->
+    <section class="fade-in" id="expectations">
+        <div class="container">
+            <h2 class="section-title"><span>求职期望</span></h2>
+            <div class="salary-section">
+                <div class="salary-label">期望薪资</div>
+                <div class="salary-value">19,000 - 25,000 元/月</div>
+            </div>
+            
+            <div style="margin-top: 60px;">
+                <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 32px; text-align: center;">自我评价</h3>
+                <div class="evaluation-text">
+                    <p>具备<span class="highlight">3年+服务运营与数据驱动经验</span>，核心能力覆盖"数据拆解-流程优化-跨部门协同"：</p>
+                    <p><strong>数据端：</strong>精通SQL/Excel，能独立完成业务数据集拆解、指标计算与可视化报表输出；</p>
+                    <p><strong>业务端：</strong>主导过工单智能分配、用户体验优化等项目，实现<span class="highlight">效率提升29%、人力成本降18%、核心业务NPS升5%</span>；</p>
+                    <p><strong>工具端：</strong>擅长用AI工具（Gemini/GPT）辅助提效，可快速生成数据处理逻辑、优化工作流程。</p>
+                    <br>
+                    <p>具备"业务痛点定位+落地执行"能力，适配互联网/科技行业的服务效能、资源优化类岗位。</p>
+                    <p>因个人职业规划聚焦"数据+AI驱动的运营场景"，当前岗位在数据权限开放、前沿工具应用上与长期方向匹配度不足，故寻求更契合的发展平台。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2026 陈江浩 | 用数据创造价值</p>
+        </div>
+    </footer>
+
+    <!-- Preview Modal -->
+    <div class="preview-modal" id="previewModal">
+        <button class="preview-close" id="previewClose" aria-label="关闭">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="preview-content" id="previewContent">
+            <!-- Preview content will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Preview Modal functionality
+        const previewModal = document.getElementById('previewModal');
+        const previewContent = document.getElementById('previewContent');
+        const previewClose = document.getElementById('previewClose');
+
+        // Experience data
+        const experienceData = {
+            exp1: {
+                type: 'experience',
+                company: '平安健康互联网股份有限公司',
+                position: '服务质量部 | 用户体验管理岗',
+                period: '2026.01 - 至今 | 上海',
+                content: `
+                    <p><strong>聚焦全渠道用户体验优化</strong>，以"用户声音-业务推动"为核心链路开展工作：</p>
+                    <p><strong>需求侧：</strong>统筹调研问卷、NPS反馈等全渠道用户声音收集，通过内部智能文档（飞书多维表格同源工具）完成数据整理、可视化看板输出，沉淀体检/健康商城/护工服务等核心业务的体验痛点。</p>
+                    <p><strong>供给侧：</strong>联动业务方推动优化落地（如服务策略迭代、供应商资源覆盖率提升、产品功能调整），累计跟进12个体验优化项目，<span class="highlight">核心业务NPS提升5%</span>。</p>
+                    <p><strong>服务团队效率提升：</strong>开展专项培训（如VoIP工具使用、问题应对技巧），强化员工处理能力，<span class="highlight">团队响应时效缩短20%</span>；实现对客服务效率提升25%、人力成本削减18%。</p>
+                `
+            },
+            exp2: {
+                type: 'experience',
+                company: '上海携程国际旅行社有限公司',
+                position: '国际业务部门 - 日本市场机票板块 | 高级知识分析师',
+                period: '2022.05 - 2025.12 | 上海',
+                content: `
+                    <p>负责日本市场机票业务的数据分析与流程优化，通过数据驱动的方式提升服务效率、降低人力成本，主导多个重点项目并取得显著成果。</p>
+                    <p><strong>核心职责：</strong></p>
+                    <p>• 分析日本市场机票业务数据，识别服务痛点和优化机会</p>
+                    <p>• 主导多个数据驱动的效率提升项目</p>
+                    <p>• 推动流程标准化和资源合理配置</p>
+                    <p><strong>关键成果：</strong></p>
+                    <p>• 工单处理效率提升29%</p>
+                    <p>• 人力成本降低18%</p>
+                    <p>• 建立数据监控-跨部门同步-流程标准化闭环</p>
+                `
+            }
+        };
+
+        // Project data
+        const projectData = {
+            project1: {
+                type: 'project',
+                title: '数据驱动的工单时长赋值与资源合理配置项目',
+                role: '项目负责人',
+                period: '2025.01 - 2025.06',
+                bg: '因员工能力差异导致工单处理效率不同，而工单分配系统未实现"能者多分"的智能化分配，出现"忙闲不均"现象，旨在优化工单分配机制，提升整体处理效率。',
+                achievements: [
+                    '推动工单分配模式变革，从传统排队分配转变为依据个人处理上限分配的智能化模式，实现资源合理调配',
+                    '取数分析各类工单类型，结合领班经验，为每个业务类型合理赋值，确保分配标准科学可行',
+                    '<span class="highlight">工单处理效率从 17hour/case 优化至 12hour/case，有效解决"忙闲不均"问题，团队单日工单承载量提升 35%</span>'
+                ]
+            },
+            project2: {
+                type: 'project',
+                title: '数据驱动下的服务效率提升与人力成本降低项目',
+                role: '项目负责人',
+                period: '2025.01 - 2025.05',
+                bg: '针对日本市场航班变动场景，需从旅行社单向联系客人通知信息，因联系不上客人严重消耗人力，旨在通过优化联系方式与流程减少人力成本。',
+                achievements: [
+                    '取数对比起飞前2个半月内每隔15天联系上客人的比例，同时对比Voip电话和普通电话接通率，为后续优化提供数据支撑',
+                    '推动自动化外呼和自动化邮件上线，将人工联系的阈值时长从2个半月调整到半个月，减少人工介入范围',
+                    '在团队内推广并监督Voip的使用率，<span class="highlight">成功将Voip使用率从 5% 提升至 60%</span>，提升联系效率',
+                    '<span class="highlight">电话接通率从 23% 提升至 28%，单月节省人力成本约 4 万元</span>'
+                ]
+            },
+            project3: {
+                type: 'project',
+                title: '供应商服务流程标准化与效率提升项目',
+                role: '项目负责人',
+                period: '2025.01 - 2025.05',
+                bg: 'Trip.com无证件机票订单占比70%，但2025年前2个月有200个case因产品已打"无证件预定"标签，供应商仍索要冗余证件而暂缓出票，造成商户人力浪费与客诉率上升，目标从流程合规性层面解决对商服务痛点。',
+                achievements: [
+                    '从数据中提取关键字自建字段，精准提取无证件预定暂缓单据的数据，明确问题核心',
+                    '列举Top问题供应商，在业务沟通会议上同步供应商明细，向供应商推送业务规范要求，推动合规执行',
+                    '<span class="highlight">供应商因证件问题暂缓出票量月减 80%</span>，建立"数据监控-跨部门同步-流程标准化"闭环，该模式复用至2个同类服务场景'
+                ]
+            }
+        };
+
+        // Skill data
+        const skillData = {
+            excel: {
+                type: 'skill',
+                name: 'Excel',
+                level: '精通',
+                desc: '熟练使用函数（VLOOKUP/数据透视表）+可视化图表，可独立完成业务数据报表。能够通过Excel完成复杂的业务数据分析，创建专业的数据可视化报表，为业务决策提供数据支持。'
+            },
+            sql: {
+                type: 'skill',
+                name: 'SQL',
+                level: '掌握',
+                desc: '掌握子句/计算逻辑，能拆解业务数据集，支持复杂数据分析需求。能够独立编写SQL查询语句，完成数据提取、清洗、聚合等操作，支持业务部门的数据分析需求。'
+            },
+            ai: {
+                type: 'skill',
+                name: 'AI 工具',
+                level: '精通',
+                desc: '掌握 Gemini/GPT，可辅助生成复杂的 Excel/SQL 函数、优化数据处理逻辑。善于利用AI工具提升工作效率，快速生成数据处理方案，优化工作流程。'
+            }
+        };
+
+        // Function to show preview
+        function showPreview(data) {
+            let html = '';
+            
+            if (data.type === 'experience') {
+                html = `
+                    <div class="preview-company">${data.company}</div>
+                    <div class="preview-position">${data.position}</div>
+                    <div class="preview-period">${data.period}</div>
+                    <div class="preview-body">${data.content}</div>
+                `;
+            } else if (data.type === 'project') {
+                html = `
+                    <div class="preview-project-title">${data.title}</div>
+                    <div class="preview-project-role">${data.role}</div>
+                    <div class="preview-project-period">${data.period}</div>
+                    <div class="preview-project-bg"><strong>项目背景：</strong>${data.bg}</div>
+                    <div class="preview-achievements">
+                        ${data.achievements.map(achievement => 
+                            `<div class="preview-achievement-item">${achievement}</div>`
+                        ).join('')}
+                    </div>
+                `;
+            } else if (data.type === 'skill') {
+                html = `
+                    <div class="preview-skill-name">${data.name}</div>
+                    <div class="preview-skill-level">${data.level}</div>
+                    <div class="preview-skill-desc">${data.desc}</div>
+                `;
+            }
+            
+            previewContent.innerHTML = html;
+            previewModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to close preview
+        function closePreview() {
+            previewModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on button click
+        previewClose.addEventListener('click', closePreview);
+
+        // Close modal on background click
+        previewModal.addEventListener('click', (e) => {
+            if (e.target === previewModal) {
+                closePreview();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && previewModal.classList.contains('active')) {
+                closePreview();
+            }
+        });
+
+        // Add click handlers to skill cards
+        document.querySelectorAll('.skill-card').forEach((item) => {
+            item.addEventListener('click', () => {
+                const skillKey = item.getAttribute('data-skill');
+                if (skillData[skillKey]) {
+                    showPreview(skillData[skillKey]);
+                }
+            });
+        });
+
+        // Add click handlers to experience items
+        document.querySelectorAll('.experience-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                const expKey = `exp${index + 1}`;
+                if (experienceData[expKey]) {
+                    showPreview(experienceData[expKey]);
+                }
+            });
+        });
+
+        // Add click handlers to project cards
+        document.querySelectorAll('.project-card').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                const projectKey = `project${index + 1}`;
+                if (projectData[projectKey]) {
+                    showPreview(projectData[projectKey]);
+                }
+            });
+        });
+
+        // Navigation functionality
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const scrollProgress = document.getElementById('scrollProgress');
+        let lastScrollY = window.scrollY;
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        /* Hide/show navbar on scroll */
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            // 始终保持导航栏可见，不自动隐藏
+            if (currentScrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+
+        // Active link highlighting
+        const sections = document.querySelectorAll('section[id]');
+        
+        function updateActiveLink() {
+            const scrollY = window.scrollY;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Parallax effect on hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight);
+            }
+        });
+    </script>
+</body>
+</html>
